@@ -13,7 +13,7 @@ begin
     open cursor2;
     repeat
 		fetch next from cursor2 into thegrade; 
-		if (thegrade='A+' or thegrade='A ')
+		if ((thegrade='A+' or thegrade='A ')AND not done)
         then set Anum=Anum+1;
         end if;
 	until done end repeat;
@@ -44,7 +44,7 @@ begin
 	   open cursor1;
        repeat 
 	   fetch next from cursor1 into thegrade; 
-       if (thegrade='C+' or thegrade='C ' or thegrade='C-')
+       if ((thegrade='C+' or thegrade='C ' or thegrade='C-') AND not done)
        then return 'C';
        end if;
 	until done end repeat;
