@@ -1,10 +1,10 @@
 drop function query_salary;
 DELIMITER //
 create function query_salary(thedept_name varchar(20))
-returns int
+returns numeric(8,2)
 begin
 	declare done boolean default 0;
-	declare whole_salary int default 0;
+	declare whole_salary numeric(8,2) default 0;
 	declare thesalary numeric(8,2);
 	declare cursor1 
 	cursor for select salary from instructor where instructor.dept_name=thedept_name;
