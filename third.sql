@@ -35,13 +35,7 @@ begin
 	then
     return 'C';
 	end if;
-	if(countA(theID)>1)
-    then
-    return 'A';
-	end if;
-	if(countA(theID)=1)
-    then
-	   open cursor1;
+    open cursor1;
        repeat 
 	   fetch next from cursor1 into thegrade; 
        if ((thegrade='C+' or thegrade='C ' or thegrade='C-') AND not done)
@@ -49,8 +43,12 @@ begin
        end if;
 	until done end repeat;
     close cursor1;
-	return 'B';
+	if(countA(theID)>1)
+    then
+    return 'A';
 	end if;
+	return 'B';
+	
     
 end//
 DELIMITER ;
