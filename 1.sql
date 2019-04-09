@@ -1,23 +1,14 @@
-SELECT
-	student.name,
-	course.title AS course_name,
-	takes.grade
-FROM
-	advisor,
-	course,
-	instructor,
-	student,
-	takes,
-	teaches
-WHERE
-	(
-		advisor.i_ID = instructor.ID
-		AND advisor.s_ID = student.ID
-		AND instructor.ID = teaches.ID
-		AND student.ID = takes.ID
-		AND takes.course_id = teaches.course_id
-		AND takes.course_id = course.course_id
-		AND (
-			takes.grade IN ('C ', 'C-', 'D', 'D+', 'D-')
-		)
-	);
+select distinct student.name , course.title, takes.grade 
+from student , advisor, instructor, takes, teaches, course
+where 
+(	student.ID=advisor.s_id 
+	AND course.course_id=teaches.course_id  
+	AND instructor.ID=advisor.i_id 
+	AND takes.ID=student.ID 
+	AND takes.semester=teaches.semester 
+	AND takes.sec_id = teaches.sec_id 
+	AND  takes.year = teaches.year 
+	AND takes.course_id=teaches.course_id 
+	AND teaches.ID=instructor.ID 
+	AND(takes.grade="C " or takes.grade="C-")
+)
